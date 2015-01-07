@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	
+	<bean id="testService" class="cn.rm.network.service.TestService"></bean>
+	
+	<bean id="loggerClass" class="cn.rm.network.logger.MyLoggerManager"  init-method="initThread" lazy-init="false">
+	</bean>
+	
+</beans>
+
+	
