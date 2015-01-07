@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Blacklist">
+<cache/>
+<insert id="save" parameterType="Blacklist" useGeneratedKeys="true" keyColumn="GENERATED_KEY" keyProperty="id">
+    insert INTO cmm_black_list
+        (UserID, UserName, UserIP, CommentCount, ImpressionCount, BeginTime, EndTime, State, Remark, IsDelete
+        , Creater, CreateTime, LastUpdater, LastUpdateTime)
+    values
+        (#{userID}, #{userName}, #{userIP}, #{commentCount}, #{impressionCount}, #{beginTime}, #{endTime}, 
+        #{state}, #{remark}, #{isDelete}, #{creater}, #{createTime}, #{lastUpdater}, #{lastUpdateTime})
+</insert>
+
+<update id="update" parameterType="Blacklist">
+    update cmm_black_list
+    <set>
+        <if test="id !=null ">id = #{id},</if>
+        <if test="userID !=null ">UserID = #{userID},</if>
+        <if test="userName !=null ">UserName = #{userName},</if>
+        <if test="userIP !=null ">UserIP = #{userIP},</if>
+        <if test="commentCount !=null ">CommentCount = #{commentCount},</if>
+        <if test="impressionCount !=null ">ImpressionCount = #{impressionCount},</if>
+        <if test="beginTime !=null ">BeginTime = #{beginTime},</if>
+        <if test="endTime !=null ">EndTime = #{endTime},</if>
+        <if test="state !=null ">State = #{state},</if>
+        <if test="remark !=null ">Remark = #{remark},</if>
+        <if test="isDelete !=null ">IsDelete = #{isDelete},</if>
+        <if test="creater !=null ">Creater = #{creater},</if>
+        <if test="createTime !=null ">CreateTime = #{createTime}</if>
+        <if test="lastUpdater !=null ">LastUpdater = #{lastUpdater},</if>
+        <if test="lastUpdateTime !=null ">LastUpdateTime = #{lastUpdateTime},</if>
+    </set>
+    where id = #{id}
+</update>
+
+<select id="findById" resultType="Blacklist" parameterType="Integer">
+    select * from cmm_black_list b where id = #{id}
+</select>
+
+<select id="findByParams" resultType="Blacklist" parameterType="map">  
+    select * from cmm_black_list
+    <where>
+        <![CDATA[ 1 = 1  ]]>
+        <if test="id !=null "><![CDATA[ AND id = #{id}  ]]></if>
+        <if test="userID !=null "><![CDATA[ AND UserID = #{userID}  ]]></if>
+        <if test="userName !=null "><![CDATA[ AND UserName = #{userName}  ]]></if>
+        <if test="userIP !=null "><![CDATA[ AND UserIP = #{userIP}  ]]></if>
+        <if test="commentCount !=null "><![CDATA[ AND CommentCount = #{commentCount}  ]]></if>
+        <if test="impressionCount !=null "><![CDATA[ AND ImpressionCount = #{impressionCount}  ]]></if>
+        <if test="beginTime !=null "><![CDATA[ AND BeginTime = #{beginTime}  ]]></if>
+        <if test="endTime !=null "><![CDATA[ AND EndTime = #{endTime}  ]]></if>
+        <if test="state !=null "><![CDATA[ AND State = #{state}  ]]></if>
+        <if test="remark !=null "><![CDATA[ AND Remark = #{remark}  ]]></if>
+        <if test="isDelete !=null "><![CDATA[ AND IsDelete = #{isDelete}  ]]></if>
+        <if test="creater !=null "><![CDATA[ AND Creater = #{creater}  ]]></if>
+        <if test="createTime !=null "><![CDATA[ AND CreateTime = #{createTime}  ]]></if>
+        <if test="lastUpdater !=null "><![CDATA[ AND LastUpdater = #{lastUpdater}  ]]></if>
+        <if test="lastUpdateTime !=null "><![CDATA[ AND LastUpdateTime = #{lastUpdateTime}  ]]></if>
+        <if test="start !=null and limit !=null"><![CDATA[ LIMIT  #{start},#{limit}  ]]></if>
+    </where>
+</select>
+
+<select id="getTotalCounts" parameterType="map" resultType="Integer">
+    SELECT COUNT(*) FROM cmm_black_list
+    <where>
+        <![CDATA[ 1 = 1  ]]>
+        <if test="id !=null "><![CDATA[ AND id = #{id}  ]]></if>
+        <if test="userID !=null "><![CDATA[ AND UserID = #{userID}  ]]></if>
+        <if test="userName !=null "><![CDATA[ AND UserName = #{userName}  ]]></if>
+        <if test="userIP !=null "><![CDATA[ AND UserIP = #{userIP}  ]]></if>
+        <if test="commentCount !=null "><![CDATA[ AND CommentCount = #{commentCount}  ]]></if>
+        <if test="impressionCount !=null "><![CDATA[ AND ImpressionCount = #{impressionCount}  ]]></if>
+        <if test="beginTime !=null "><![CDATA[ AND BeginTime = #{beginTime}  ]]></if>
+        <if test="endTime !=null "><![CDATA[ AND EndTime = #{endTime}  ]]></if>
+        <if test="state !=null "><![CDATA[ AND State = #{state}  ]]></if>
+        <if test="remark !=null "><![CDATA[ AND Remark = #{remark}  ]]></if>
+        <if test="isDelete !=null "><![CDATA[ AND IsDelete = #{isDelete}  ]]></if>
+        <if test="creater !=null "><![CDATA[ AND Creater = #{creater}  ]]></if>
+        <if test="createTime !=null "><![CDATA[ AND CreateTime = #{createTime}  ]]></if>
+        <if test="lastUpdater !=null "><![CDATA[ AND LastUpdater = #{lastUpdater}  ]]></if>
+        <if test="lastUpdateTime !=null "><![CDATA[ AND LastUpdateTime = #{lastUpdateTime}  ]]></if>
+    </where>
+</select>
+
+<select id="findActiveListByParams" resultType="Blacklist" parameterType="map">  
+    select * from cmm_black_list
+    <where>
+        <![CDATA[ 1 = 1  ]]>
+        <if test="id !=null "><![CDATA[ AND id = #{id}  ]]></if>
+        <if test="userID !=null "><![CDATA[ AND UserID = #{userID}  ]]></if>
+        <if test="userName !=null "><![CDATA[ AND UserName = #{userName}  ]]></if>
+        <if test="userIP !=null "><![CDATA[ AND UserIP = #{userIP}  ]]></if>
+        <if test="commentCount !=null "><![CDATA[ AND CommentCount = #{commentCount}  ]]></if>
+        <if test="impressionCount !=null "><![CDATA[ AND ImpressionCount = #{impressionCount}  ]]></if>
+        <if test="beginTime !=null "><![CDATA[ AND BeginTime > #{currentTime}  ]]></if>
+        <if test="endTime !=null "><![CDATA[ AND EndTime < #{currentTime}  ]]></if>
+        <if test="state !=null "><![CDATA[ AND State = #{state}  ]]></if>
+        <if test="remark !=null "><![CDATA[ AND Remark = #{remark}  ]]></if>
+        <if test="isDelete !=null "><![CDATA[ AND IsDelete = #{isDelete}  ]]></if>
+        <if test="creater !=null "><![CDATA[ AND Creater = #{creater}  ]]></if>
+        <if test="createTime !=null "><![CDATA[ AND CreateTime = #{createTime}  ]]></if>
+        <if test="lastUpdater !=null "><![CDATA[ AND LastUpdater = #{lastUpdater}  ]]></if>
+        <if test="lastUpdateTime !=null "><![CDATA[ AND LastUpdateTime = #{lastUpdateTime}  ]]></if>
+        <if test="start !=null and limit !=null"><![CDATA[ LIMIT  #{start},#{limit}  ]]></if>
+    </where>
+</select>
+
+<select id="getActiveCounts" parameterType="map" resultType="Integer">
+    SELECT COUNT(*) FROM cmm_black_list
+    <where>
+        <![CDATA[ 1 = 1  ]]>
+        <if test="id !=null "><![CDATA[ AND id = #{id}  ]]></if>
+        <if test="userID !=null "><![CDATA[ AND UserID = #{userID}  ]]></if>
+        <if test="userName !=null "><![CDATA[ AND UserName = #{userName}  ]]></if>
+        <if test="userIP !=null "><![CDATA[ AND UserIP = #{userIP}  ]]></if>
+        <if test="commentCount !=null "><![CDATA[ AND CommentCount = #{commentCount}  ]]></if>
+        <if test="impressionCount !=null "><![CDATA[ AND ImpressionCount = #{impressionCount}  ]]></if>
+        <if test="beginTime !=null "><![CDATA[ AND BeginTime > #{currentTime}  ]]></if>
+        <if test="endTime !=null "><![CDATA[ AND EndTime < #{currentTime}  ]]></if>
+        <if test="state !=null "><![CDATA[ AND State = #{state}  ]]></if>
+        <if test="remark !=null "><![CDATA[ AND Remark = #{remark}  ]]></if>
+        <if test="isDelete !=null "><![CDATA[ AND IsDelete = #{isDelete}  ]]></if>
+        <if test="creater !=null "><![CDATA[ AND Creater = #{creater}  ]]></if>
+        <if test="createTime !=null "><![CDATA[ AND CreateTime = #{createTime}  ]]></if>
+        <if test="lastUpdater !=null "><![CDATA[ AND LastUpdater = #{lastUpdater}  ]]></if>
+        <if test="lastUpdateTime !=null "><![CDATA[ AND LastUpdateTime = #{lastUpdateTime}  ]]></if>
+    </where>
+</select>
+
+<delete id="delete" parameterType="map">
+	delete FROM cmm_black_list
+	<where>
+        <![CDATA[ 1 = 1  ]]>
+        <if test="id !=null "><![CDATA[ AND id = #{id}  ]]></if>
+        <if test="userID !=null "><![CDATA[ AND UserID = #{userID}  ]]></if>
+        <if test="userName !=null "><![CDATA[ AND UserName = #{userName}  ]]></if>
+        <if test="userIP !=null "><![CDATA[ AND UserIP = #{userIP}  ]]></if>
+        <if test="commentCount !=null "><![CDATA[ AND CommentCount = #{commentCount}  ]]></if>
+        <if test="impressionCount !=null "><![CDATA[ AND ImpressionCount = #{impressionCount}  ]]></if>
+        <if test="beginTime !=null "><![CDATA[ AND BeginTime = #{beginTime}  ]]></if>
+        <if test="endTime !=null "><![CDATA[ AND EndTime = #{endTime}  ]]></if>
+        <if test="state !=null "><![CDATA[ AND State = #{state}  ]]></if>
+        <if test="remark !=null "><![CDATA[ AND Remark = #{remark}  ]]></if>
+        <if test="isDelete !=null "><![CDATA[ AND IsDelete = #{isDelete}  ]]></if>
+        <if test="creater !=null "><![CDATA[ AND Creater = #{creater}  ]]></if>
+        <if test="createTime !=null "><![CDATA[ AND CreateTime = #{createTime}  ]]></if>
+        <if test="lastUpdater !=null "><![CDATA[ AND LastUpdater = #{lastUpdater}  ]]></if>
+        <if test="lastUpdateTime !=null "><![CDATA[ AND LastUpdateTime = #{lastUpdateTime}  ]]></if>
+    </where>
+</delete>
+
+</mapper>
