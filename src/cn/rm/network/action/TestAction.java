@@ -1,5 +1,7 @@
 package cn.rm.network.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
+
+import cn.rm.network.entity.PingData;
+import cn.rm.network.service.PingDataService;
 import cn.rm.network.service.TestService;
 
 @Controller
@@ -20,6 +26,9 @@ public class TestAction {
 	
 	@Autowired
 	private TestService testService;
+	
+	@Autowired
+	private PingDataService pingDataService;
 	
 	@RequestMapping("/hello")
 	public ModelAndView testView(HttpServletRequest request, HttpServletResponse response){
@@ -35,5 +44,15 @@ public class TestAction {
 	public String world(){
 		return "hello world";
 	}
-
+	
+	/*@RequestMapping("/getData")
+	@ResponseBody
+	public String getData(String uname){
+		PingData pingData = new PingData();
+		pingData.setUname(uname);
+		List<PingData> pingDataList = pingDataService.queryPingData(pingData);
+		String result = JSON.toJSONString(pingDataList);
+		return result;
+	}
+*/
 }

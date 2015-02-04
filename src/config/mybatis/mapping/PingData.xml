@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="PingData">
+<cache/>
+<insert id="save" parameterType="PingData" >
+    insert into taoys_ping value(id,uname,email,ipAddress,timeOut,pingTimes,createTime) 
+	values(taoys_seq_ping.nextval,#{uname},#{email},#{ipAddress},#{timeOut},#{pingTimes},#{createTime})
+</insert>
+
+<update id="update" parameterType="PingData">
+    update taoys_ping
+    <set>
+        <if test="id !=null ">id = #{id},</if>
+        <if test="uname !=null ">uname = #{uname},</if>
+        <if test="email !=null ">email = #{email},</if>
+        <if test="ipAddress !=null ">ipAddress = #{ipAddress},</if>
+        <if test="timeOut !=null ">timeOut = #{timeOut},</if>
+        <if test="pingTimes !=null ">pingTimes = #{pingTimes},</if>
+        <if test="createTime !=null ">createTime = #{createTime},</if>
+    </set>
+    where id = #{id}
+</update>
+
+<select id="findById" resultType="PingData" parameterType="Integer">
+    select * from taoys_ping b where id = #{id}
+</select>
+
+<select id="findListByParams" resultType="PingData" parameterType="map">  
+    select id, uname, email, ipAddress, timeOut, pingTimes, createTime, status  from
+    (select A.*, rownum rn from taoys_ping A
+    <where>
+        <![CDATA[ 1 = 1  ]]>
+        <if test="id !=null "><![CDATA[ AND id = #{id}  ]]></if>
+        <if test="uname !=null "><![CDATA[ AND uname = #{uname}  ]]></if>
+        <if test="email !=null "><![CDATA[ AND email = #{email}  ]]></if>
+        <if test="ipAddress !=null "><![CDATA[ AND ipAddress = #{ipAddress}  ]]></if>
+        <if test="timeOut !=null "><![CDATA[ AND timeOut = #{timeOut}  ]]></if>
+        <if test="pingTimes !=null "><![CDATA[ AND pingTimes = #{pingTimes}  ]]></if>
+        <if test="startDate !=null "><![CDATA[ AND createTime > #{startDate}  ]]></if>
+        <if test="endDate !=null "><![CDATA[ AND createTime <= #{endDate}  ]]></if>
+        <if test="end !=null "><![CDATA[ AND rownum <= #{end}  ]]></if>
+    </where>
+    )<where>
+    	<if test="start !=null"><![CDATA[ rn > #{start}  ]]></if>
+    </where>
+    <![CDATA[ ORDER BY ipAddress, createTime ASC  ]]>
+</select>
+
+<select id="getTotalCounts" parameterType="map" resultType="Integer">
+    SELECT COUNT(*) FROM taoys_ping
+    <where>
+        <![CDATA[ 1 = 1  ]]>
+        <if test="id !=null "><![CDATA[ AND id = #{id}  ]]></if>
+        <if test="uname !=null "><![CDATA[ AND uname = #{uname}  ]]></if>
+        <if test="email !=null "><![CDATA[ AND email = #{email}  ]]></if>
+        <if test="ipAddress !=null "><![CDATA[ AND ipAddress = #{ipAddress}  ]]></if>
+        <if test="timeOut !=null "><![CDATA[ AND timeOut = #{timeOut}  ]]></if>
+        <if test="pingTimes !=null "><![CDATA[ AND pingTimes = #{pingTimes}  ]]></if>
+        <if test="createTime !=null "><![CDATA[ AND createTime = #{createTime}  ]]></if>
+    </where>
+</select>
+
+
+<delete id="delete" parameterType="map">
+	delete FROM taoys_ping
+	<where>
+        <![CDATA[ 1 = 1  ]]>
+       <if test="id !=null "><![CDATA[ AND id = #{id}  ]]></if>
+        <if test="uname !=null "><![CDATA[ AND uname = #{uname}  ]]></if>
+        <if test="email !=null "><![CDATA[ AND email = #{email}  ]]></if>
+        <if test="ipAddress !=null "><![CDATA[ AND ipAddress = #{ipAddress}  ]]></if>
+        <if test="timeOut !=null "><![CDATA[ AND timeOut = #{timeOut}  ]]></if>
+        <if test="pingTimes !=null "><![CDATA[ AND pingTimes = #{pingTimes}  ]]></if>
+        <if test="createTime !=null "><![CDATA[ AND createTime = #{createTime}  ]]></if>
+    </where>
+</delete>
+
+</mapper>

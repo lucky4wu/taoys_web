@@ -26,18 +26,18 @@
 	</settings>
  
 	<typeAliases>
-		<!-- <typeAlias alias="Blacklist" type="cn.tv189.comment.domain.Blacklist" /> -->
+		<typeAlias alias="PingData" type="cn.rm.network.entity.PingData"/>
 	</typeAliases>
 
 	<plugins>
 		<plugin interceptor="cn.org.rapid_framework.ibatis3.plugin.OffsetLimitInterceptor">
 			<!-- 指定数据库分页方言Dialect, 其它方言:OracleDialect,SQLServerDialect,SybaseDialect,DB2Dialect,PostgreSQLDialect,MySQLDialect,DerbyDialect -->
 			<property name="dialectClass"
-				value="cn.org.rapid_framework.jdbc.dialect.MySQLDialect" />
+				value="cn.org.rapid_framework.jdbc.dialect.OracleDialect" />
 		</plugin>
 	</plugins>
 	
 	<mappers>
-		<!-- <mapper resource="config/mybatis/mapping/Blacklist.xml" /> -->
+		<mapper resource="config/mybatis/mapping/PingData.xml" />
 	</mappers>
 </configuration>

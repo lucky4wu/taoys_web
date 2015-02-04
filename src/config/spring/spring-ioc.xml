@@ -4,6 +4,14 @@
 	
 	<bean id="testService" class="cn.rm.network.service.TestService"></bean>
 	
+	<bean id="pingService" class="cn.rm.network.service.PingDataService"></bean>
+	
+	<bean id="pingDataDao" class="cn.rm.network.dao.PingDataDao">
+		<property name="sqlReadSession">
+			<ref bean="sqlReadSession"/>
+		</property>
+	</bean>
+	
 	<bean id="loggerClass" class="cn.rm.network.logger.MyLoggerManager"  init-method="initThread" lazy-init="false">
 	</bean>
 	
