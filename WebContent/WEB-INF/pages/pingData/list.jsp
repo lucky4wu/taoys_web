@@ -3,18 +3,22 @@
 <head>
 	<title>Ping Data</title>
 	<link rel="stylesheet" href="../js/jquery-ui-1.11.2.custom/jquery-ui.css" >
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="../css/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 </head>
 <body>
-	<h1>${name }</h1>
+	<h1>Ping Data</h1>
 	uname:<input type="text" id="uname" name="uname" value="" />
 	startDate:<input type="text" class="datepicker" id="startDate" name="startDate" />
 	endDate:<input type="text" class="datepicker" id="endDate" name="endDate" />
 	pageSize:<input type="text" id="pageSize" name="pageSize" value="20" />
 	pageNum:<input type="text" id="pageNum" name="pageNum" value="1" />
 	<input type="button" id="btn" value="clickToShow" />
-	<table id="content"></table>
+	<table id="content" class="table table-hover"></table>
 </body>
-<script type="text/javascript" src="../js/jquery-1.4.3.js" /></script>
+<script type="text/javascript" src="../js/jquery-1.11.2.min.js" /></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../css/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/jquery-ui-1.11.2.custom/jquery-ui.js" /></script>
 <script type="text/javascript">
 $(function(){
