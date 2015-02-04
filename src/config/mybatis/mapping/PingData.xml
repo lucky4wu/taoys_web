@@ -36,8 +36,8 @@
         <if test="ipAddress !=null "><![CDATA[ AND ipAddress = #{ipAddress}  ]]></if>
         <if test="timeOut !=null "><![CDATA[ AND timeOut = #{timeOut}  ]]></if>
         <if test="pingTimes !=null "><![CDATA[ AND pingTimes = #{pingTimes}  ]]></if>
-        <if test="startDate !=null "><![CDATA[ AND createTime > #{startDate}  ]]></if>
-        <if test="endDate !=null "><![CDATA[ AND createTime <= #{endDate}  ]]></if>
+        <if test="startDate !=null "><![CDATA[ AND createTime > to_char(to_date(#{startDate}, 'mm/dd/yyyy'),'yyyy-mm-dd hh24:mi:ss')  ]]></if>
+        <if test="endDate !=null "><![CDATA[ AND createTime <= to_char(to_date(#{endDate}, 'mm/dd/yyyy')+1, 'yyyy-mm-dd hh24:mi:ss') ]]></if>
         <if test="end !=null "><![CDATA[ AND rownum <= #{end}  ]]></if>
     </where>
     )<where>
